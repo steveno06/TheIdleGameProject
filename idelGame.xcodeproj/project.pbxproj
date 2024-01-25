@@ -14,6 +14,8 @@
 		9A5466122B604E370046F294 /* idelGame.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466102B604E370046F294 /* idelGame.xcdatamodeld */; };
 		9A5466142B604E390046F294 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A5466132B604E390046F294 /* Assets.xcassets */; };
 		9A5466172B604E390046F294 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A5466152B604E390046F294 /* LaunchScreen.storyboard */; };
+		9A5466202B62CF870046F294 /* Player+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A54661E2B62CF870046F294 /* Player+CoreDataClass.swift */; };
+		9A5466212B62CF870046F294 /* Player+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A54661F2B62CF870046F294 /* Player+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		9A5466132B604E390046F294 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A5466162B604E390046F294 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9A5466182B604E390046F294 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9A54661E2B62CF870046F294 /* Player+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9A54661F2B62CF870046F294 /* Player+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,7 @@
 		9A5466062B604E370046F294 /* idelGame */ = {
 			isa = PBXGroup;
 			children = (
+				9A5466222B62D08E0046F294 /* Models */,
 				9A5466072B604E370046F294 /* AppDelegate.swift */,
 				9A5466092B604E370046F294 /* SceneDelegate.swift */,
 				9A54660B2B604E370046F294 /* ViewController.swift */,
@@ -68,6 +73,15 @@
 				9A5466102B604E370046F294 /* idelGame.xcdatamodeld */,
 			);
 			path = idelGame;
+			sourceTree = "<group>";
+		};
+		9A5466222B62D08E0046F294 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9A54661E2B62CF870046F294 /* Player+CoreDataClass.swift */,
+				9A54661F2B62CF870046F294 /* Player+CoreDataProperties.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,6 +156,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A54660C2B604E370046F294 /* ViewController.swift in Sources */,
+				9A5466202B62CF870046F294 /* Player+CoreDataClass.swift in Sources */,
+				9A5466212B62CF870046F294 /* Player+CoreDataProperties.swift in Sources */,
 				9A5466122B604E370046F294 /* idelGame.xcdatamodeld in Sources */,
 				9A5466082B604E370046F294 /* AppDelegate.swift in Sources */,
 				9A54660A2B604E370046F294 /* SceneDelegate.swift in Sources */,
