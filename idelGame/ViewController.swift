@@ -37,6 +37,7 @@ class ViewController: UIViewController {
     }
 
     private func setupUI() {
+        let fishcard = createCard()
         // Balance Title
         view.addSubview(balanceTitle)
         balanceTitle.translatesAutoresizingMaskIntoConstraints = false
@@ -46,6 +47,18 @@ class ViewController: UIViewController {
             balanceTitle.widthAnchor.constraint(equalToConstant: 200),
             balanceTitle.heightAnchor.constraint(equalToConstant: 50)
         ])
+        
+        
+        view.addSubview(fishcard)
+        fishcard.translatesAutoresizingMaskIntoConstraints = false
+        fishcard.backgroundColor = .red
+        NSLayoutConstraint.activate([
+            fishcard.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            fishcard.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            fishcard.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            fishcard.heightAnchor.constraint(equalToConstant: 300),
+        ])
+        
 
         // Button
         view.addSubview(actionButton)
@@ -129,5 +142,76 @@ class ViewController: UIViewController {
         } catch {
             print("Failed to remove all data: \(error)")
         }
+    }
+    
+    private func createCard() -> UIView{
+        let card = UIView()
+        
+        let breedButton: UIButton = {
+            let button = UIButton()
+            button.backgroundColor = .black
+            button.setTitle("fish name", for: .normal)
+            button.addTarget(self, action: #selector(breedButtonPressed), for: .touchUpInside)
+            return button
+        }()
+        
+        let fishLevelLabel: UILabel = {
+            let label = UILabel()
+            label.backgroundColor = .cyan
+            label.text = "1/25"
+            return label
+        }()
+        
+        let purchaseButton: UIButton = {
+            let button = UIButton()
+            button.backgroundColor = .gray
+            button.setTitle("purchase", for: .normal)
+            button.addTarget(self, action: #selector(purchaseButtonPressed), for: .touchUpInside)
+            return button
+        }()
+        
+        card.addSubview(breedButton)
+        card.addSubview(fishLevelLabel)
+        card.addSubview(purchaseButton)
+        
+        breedButton.translatesAutoresizingMaskIntoConstraints = false
+        fishLevelLabel.translatesAutoresizingMaskIntoConstraints = false
+        purchaseButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        //Breed Button
+        NSLayoutConstraint.activate([
+            breedButton.leadingAnchor.constraint(equalTo: card.leadingAnchor, constant: 10),
+            breedButton.topAnchor.constraint(equalTo: card.topAnchor, constant: 10),
+            breedButton.widthAnchor.constraint(equalToConstant: 100),
+            breedButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        //Fish Level Label
+        NSLayoutConstraint.activate([
+            fishLevelLabel.topAnchor.constraint(equalTo: breedButton.bottomAnchor, constant: 10),
+            fishLevelLabel.centerXAnchor.constraint(equalTo: breedButton.centerXAnchor),
+            fishLevelLabel.widthAnchor.constraint(equalToConstant: 100),
+            fishLevelLabel.heightAnchor.constraint(equalToConstant: 100)
+        ])
+        //Purchase Button
+        NSLayoutConstraint.activate([
+            purchaseButton.trailingAnchor.constraint(equalTo: card.trailingAnchor, constant: 10),
+            purchaseButton.centerYAnchor.constraint(equalTo: card.centerYAnchor),
+            purchaseButton.widthAnchor.constraint(equalToConstant: 100),
+            purchaseButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        
+
+        
+        return card
+    }
+    
+    @objc private func breedButtonPressed() {
+        print("Breed button pressed")
+        // Add your custom logic here for breed button action
+    }
+
+    @objc private func purchaseButtonPressed() {
+        print("Purchase button pressed")
+        // Add your custom logic here for purchase button action
     }
 }
