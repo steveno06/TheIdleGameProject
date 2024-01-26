@@ -17,6 +17,8 @@
 		9A5466202B62CF870046F294 /* Player+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A54661E2B62CF870046F294 /* Player+CoreDataClass.swift */; };
 		9A5466212B62CF870046F294 /* Player+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A54661F2B62CF870046F294 /* Player+CoreDataProperties.swift */; };
 		9A5466242B6303980046F294 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466232B6303980046F294 /* GameSettings.swift */; };
+		9A5466272B633A510046F294 /* Fish+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466252B633A510046F294 /* Fish+CoreDataClass.swift */; };
+		9A5466282B633A510046F294 /* Fish+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466262B633A510046F294 /* Fish+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		9A54661E2B62CF870046F294 /* Player+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9A54661F2B62CF870046F294 /* Player+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9A5466232B6303980046F294 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
+		9A5466252B633A510046F294 /* Fish+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fish+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9A5466262B633A510046F294 /* Fish+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fish+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,8 @@
 		9A5466222B62D08E0046F294 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9A5466252B633A510046F294 /* Fish+CoreDataClass.swift */,
+				9A5466262B633A510046F294 /* Fish+CoreDataProperties.swift */,
 				9A54661E2B62CF870046F294 /* Player+CoreDataClass.swift */,
 				9A54661F2B62CF870046F294 /* Player+CoreDataProperties.swift */,
 			);
@@ -158,7 +164,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A5466282B633A510046F294 /* Fish+CoreDataProperties.swift in Sources */,
 				9A54660C2B604E370046F294 /* ViewController.swift in Sources */,
+				9A5466272B633A510046F294 /* Fish+CoreDataClass.swift in Sources */,
 				9A5466202B62CF870046F294 /* Player+CoreDataClass.swift in Sources */,
 				9A5466212B62CF870046F294 /* Player+CoreDataProperties.swift in Sources */,
 				9A5466122B604E370046F294 /* idelGame.xcdatamodeld in Sources */,

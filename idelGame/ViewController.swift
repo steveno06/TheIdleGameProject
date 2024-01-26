@@ -34,6 +34,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         getBalance()
+        getFish()
     }
 
     private func setupUI() {
@@ -87,6 +88,7 @@ class ViewController: UIViewController {
             print(String(players.count))
             if players.isEmpty { // First Time Opening App
                 initializePlayer()
+                initializeFish()
             } else {
                 self.balance = players[0].balance
                 DispatchQueue.main.async {
@@ -95,6 +97,24 @@ class ViewController: UIViewController {
             }
         } catch {
             // Handle error
+        }
+    }
+    
+    func getFish(){
+        print("get fish")
+        do{
+            let fishes = try context.fetch(Fish.fetchRequest())
+            if fishes.isEmpty{
+                print("fatal error no fish")
+            }
+            else{
+                for fish in fishes{
+                    print(fish.fishType!)
+                }
+            }
+        }
+        catch{
+            
         }
     }
 
@@ -106,6 +126,32 @@ class ViewController: UIViewController {
         try! context.save()
         self.balance = 0
         self.reloadBalance()
+    }
+    
+    func initializeFish() {
+        let fishes = AppConstants()
+        
+        let guppy = fishes.guppy
+        let gold = fishes.goldFish
+        
+        let guppyFish = Fish(context: context)
+        guppyFish.fishType = guppy.fishType
+        guppyFish.cost = guppy.cost
+        guppyFish.costMultiplier = guppy.costMultiplier
+        guppyFish.production = guppy.production
+        guppyFish.productionMultiplier = guppy.productionMultiplier
+        guppyFish.fishLevel = guppy.fishLevel
+        
+        let goldFish = Fish(context: context)
+        goldFish.fishType = gold.fishType
+        goldFish.cost = gold.cost
+        goldFish.costMultiplier = gold.costMultiplier
+        goldFish.production = gold.production
+        goldFish.productionMultiplier = gold.productionMultiplier
+        goldFish.fishLevel = gold.fishLevel
+        
+        try! context.save()
+        
     }
 
     func reloadBalance() {
