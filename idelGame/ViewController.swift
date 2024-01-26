@@ -38,7 +38,24 @@ class ViewController: UIViewController {
     }
 
     private func setupUI() {
-        let fishcard = createCard(target: self)
+        do{
+            let fishes = try context.fetch(Fish.fetchRequest())
+            let fishcard = createCard(target: self, fish: fishes[0])
+            view.addSubview(fishcard)
+            fishcard.translatesAutoresizingMaskIntoConstraints = false
+            fishcard.backgroundColor = .red
+            NSLayoutConstraint.activate([
+                fishcard.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+                fishcard.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+                fishcard.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+                fishcard.heightAnchor.constraint(equalToConstant: 100),
+            ])
+        }
+        catch{
+            
+        }
+        
+        
         // Balance Title
         view.addSubview(balanceTitle)
         balanceTitle.translatesAutoresizingMaskIntoConstraints = false
@@ -50,15 +67,7 @@ class ViewController: UIViewController {
         ])
         
         
-        view.addSubview(fishcard)
-        fishcard.translatesAutoresizingMaskIntoConstraints = false
-        fishcard.backgroundColor = .red
-        NSLayoutConstraint.activate([
-            fishcard.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            fishcard.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            fishcard.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            fishcard.heightAnchor.constraint(equalToConstant: 100),
-        ])
+
         
 
         // Button
@@ -190,13 +199,13 @@ class ViewController: UIViewController {
         }
     }
     
-    private func createCard(target: Any) -> UIView{
+    private func createCard(target: Any, fish: Fish) -> UIView{
         let card = UIView()
         card.translatesAutoresizingMaskIntoConstraints = false
         let breedButton: UIButton = {
             let button = UIButton()
             button.backgroundColor = .black
-            button.setTitle("fish name", for: .normal)
+            button.setTitle(fish.fishType, for: .normal)
             button.addTarget(target, action: #selector(breedButtonPressed), for: .touchUpInside)
             return button
         }()
@@ -204,7 +213,7 @@ class ViewController: UIViewController {
         let fishLevelLabel: UILabel = {
             let label = UILabel()
             label.backgroundColor = .cyan
-            label.text = "1/25"
+            label.text = String(fish.fishLevel)
             label.textAlignment = .center
             return label
         }()
@@ -212,7 +221,7 @@ class ViewController: UIViewController {
         let purchaseButton: UIButton = {
             let button = UIButton()
             button.backgroundColor = .gray
-            button.setTitle("purchase", for: .normal)
+            button.setTitle(String(fish.cost), for: .normal)
             button.addTarget(target, action: #selector(purchaseButtonPressed), for: .touchUpInside)
             return button
         }()
