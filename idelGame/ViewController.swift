@@ -53,10 +53,10 @@ class ViewController: UIViewController {
         fishcard.translatesAutoresizingMaskIntoConstraints = false
         fishcard.backgroundColor = .red
         NSLayoutConstraint.activate([
-            fishcard.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            fishcard.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            fishcard.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            fishcard.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             fishcard.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            fishcard.heightAnchor.constraint(equalToConstant: 300),
+            fishcard.heightAnchor.constraint(equalToConstant: 100),
         ])
         
 
@@ -159,6 +159,7 @@ class ViewController: UIViewController {
             let label = UILabel()
             label.backgroundColor = .cyan
             label.text = "1/25"
+            label.textAlignment = .center
             return label
         }()
         
@@ -183,21 +184,21 @@ class ViewController: UIViewController {
             breedButton.leadingAnchor.constraint(equalTo: card.leadingAnchor, constant: 10),
             breedButton.topAnchor.constraint(equalTo: card.topAnchor, constant: 10),
             breedButton.widthAnchor.constraint(equalToConstant: 100),
-            breedButton.heightAnchor.constraint(equalToConstant: 50)
+            breedButton.heightAnchor.constraint(equalToConstant: 40)
         ])
         //Fish Level Label
         NSLayoutConstraint.activate([
             fishLevelLabel.topAnchor.constraint(equalTo: breedButton.bottomAnchor, constant: 10),
             fishLevelLabel.centerXAnchor.constraint(equalTo: breedButton.centerXAnchor),
-            fishLevelLabel.widthAnchor.constraint(equalToConstant: 100),
-            fishLevelLabel.heightAnchor.constraint(equalToConstant: 100)
+            fishLevelLabel.widthAnchor.constraint(equalToConstant: 60),
+            fishLevelLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
         //Purchase Button
         NSLayoutConstraint.activate([
-            purchaseButton.trailingAnchor.constraint(equalTo: card.trailingAnchor, constant: 10),
+            purchaseButton.trailingAnchor.constraint(equalTo: card.trailingAnchor, constant: -10),
             purchaseButton.centerYAnchor.constraint(equalTo: card.centerYAnchor),
-            purchaseButton.widthAnchor.constraint(equalToConstant: 100),
-            purchaseButton.heightAnchor.constraint(equalToConstant: 50)
+            purchaseButton.widthAnchor.constraint(equalToConstant: 80),
+            purchaseButton.heightAnchor.constraint(equalToConstant: 40)
         ])
         
 
