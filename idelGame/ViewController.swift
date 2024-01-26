@@ -37,7 +37,7 @@ class ViewController: UIViewController {
     }
 
     private func setupUI() {
-        let fishcard = createCard()
+        let fishcard = createCard(target: self)
         // Balance Title
         view.addSubview(balanceTitle)
         balanceTitle.translatesAutoresizingMaskIntoConstraints = false
@@ -144,14 +144,14 @@ class ViewController: UIViewController {
         }
     }
     
-    private func createCard() -> UIView{
+    private func createCard(target: Any) -> UIView{
         let card = UIView()
-        
+        card.translatesAutoresizingMaskIntoConstraints = false
         let breedButton: UIButton = {
             let button = UIButton()
             button.backgroundColor = .black
             button.setTitle("fish name", for: .normal)
-            button.addTarget(self, action: #selector(breedButtonPressed), for: .touchUpInside)
+            button.addTarget(target, action: #selector(breedButtonPressed), for: .touchUpInside)
             return button
         }()
         
@@ -167,7 +167,7 @@ class ViewController: UIViewController {
             let button = UIButton()
             button.backgroundColor = .gray
             button.setTitle("purchase", for: .normal)
-            button.addTarget(self, action: #selector(purchaseButtonPressed), for: .touchUpInside)
+            button.addTarget(target, action: #selector(purchaseButtonPressed), for: .touchUpInside)
             return button
         }()
         
@@ -200,9 +200,6 @@ class ViewController: UIViewController {
             purchaseButton.widthAnchor.constraint(equalToConstant: 80),
             purchaseButton.heightAnchor.constraint(equalToConstant: 40)
         ])
-        
-
-        
         return card
     }
     
