@@ -38,22 +38,10 @@ class ViewController: UIViewController {
     }
 
     private func setupUI() {
-        do{
-            let fishes = try context.fetch(Fish.fetchRequest())
-            let fishcard = createCard(target: self, fish: fishes[0])
-            view.addSubview(fishcard)
-            fishcard.translatesAutoresizingMaskIntoConstraints = false
-            fishcard.backgroundColor = .red
-            NSLayoutConstraint.activate([
-                fishcard.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-                fishcard.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-                fishcard.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                fishcard.heightAnchor.constraint(equalToConstant: 100),
-            ])
-        }
-        catch{
-            
-        }
+
+        
+
+
         
         
         // Balance Title
@@ -65,7 +53,31 @@ class ViewController: UIViewController {
             balanceTitle.widthAnchor.constraint(equalToConstant: 200),
             balanceTitle.heightAnchor.constraint(equalToConstant: 50)
         ])
+        let fishes = try! context.fetch(Fish.fetchRequest())
+
+        let guppyCard = FirstFishCard()
+        guppyCard.translatesAutoresizingMaskIntoConstraints = false
+        guppyCard.backgroundColor = .red
         
+        view.addSubview(guppyCard)
+        NSLayoutConstraint.activate([
+            guppyCard.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            guppyCard.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+            guppyCard.topAnchor.constraint(equalTo: balanceTitle.bottomAnchor, constant: 10),
+            guppyCard.heightAnchor.constraint(equalToConstant: 100)
+        ])
+        
+//        let goldFishCard = createCard(target: self, fish: fishes[1])
+//        goldFishCard.translatesAutoresizingMaskIntoConstraints = false
+//        goldFishCard.backgroundColor = .red
+//        view.addSubview(goldFishCard)
+//
+//        NSLayoutConstraint.activate([
+//            goldFishCard.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+//            goldFishCard.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+//            goldFishCard.topAnchor.constraint(equalTo: guppyCard.bottomAnchor, constant: 10),
+//            goldFishCard.heightAnchor.constraint(equalToConstant: 100)
+//        ])
         
 
         
@@ -199,72 +211,4 @@ class ViewController: UIViewController {
         }
     }
     
-    private func createCard(target: Any, fish: Fish) -> UIView{
-        let card = UIView()
-        card.translatesAutoresizingMaskIntoConstraints = false
-        let breedButton: UIButton = {
-            let button = UIButton()
-            button.backgroundColor = .black
-            button.setTitle(fish.fishType, for: .normal)
-            button.addTarget(target, action: #selector(breedButtonPressed), for: .touchUpInside)
-            return button
-        }()
-        
-        let fishLevelLabel: UILabel = {
-            let label = UILabel()
-            label.backgroundColor = .cyan
-            label.text = String(fish.fishLevel)
-            label.textAlignment = .center
-            return label
-        }()
-        
-        let purchaseButton: UIButton = {
-            let button = UIButton()
-            button.backgroundColor = .gray
-            button.setTitle(String(fish.cost), for: .normal)
-            button.addTarget(target, action: #selector(purchaseButtonPressed), for: .touchUpInside)
-            return button
-        }()
-        
-        card.addSubview(breedButton)
-        card.addSubview(fishLevelLabel)
-        card.addSubview(purchaseButton)
-        
-        breedButton.translatesAutoresizingMaskIntoConstraints = false
-        fishLevelLabel.translatesAutoresizingMaskIntoConstraints = false
-        purchaseButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        //Breed Button
-        NSLayoutConstraint.activate([
-            breedButton.leadingAnchor.constraint(equalTo: card.leadingAnchor, constant: 10),
-            breedButton.topAnchor.constraint(equalTo: card.topAnchor, constant: 10),
-            breedButton.widthAnchor.constraint(equalToConstant: 100),
-            breedButton.heightAnchor.constraint(equalToConstant: 40)
-        ])
-        //Fish Level Label
-        NSLayoutConstraint.activate([
-            fishLevelLabel.topAnchor.constraint(equalTo: breedButton.bottomAnchor, constant: 10),
-            fishLevelLabel.centerXAnchor.constraint(equalTo: breedButton.centerXAnchor),
-            fishLevelLabel.widthAnchor.constraint(equalToConstant: 60),
-            fishLevelLabel.heightAnchor.constraint(equalToConstant: 20)
-        ])
-        //Purchase Button
-        NSLayoutConstraint.activate([
-            purchaseButton.trailingAnchor.constraint(equalTo: card.trailingAnchor, constant: -10),
-            purchaseButton.centerYAnchor.constraint(equalTo: card.centerYAnchor),
-            purchaseButton.widthAnchor.constraint(equalToConstant: 80),
-            purchaseButton.heightAnchor.constraint(equalToConstant: 40)
-        ])
-        return card
-    }
-    
-    @objc private func breedButtonPressed() {
-        print("Breed button pressed")
-        // Add your custom logic here for breed button action
-    }
-
-    @objc private func purchaseButtonPressed() {
-        print("Purchase button pressed")
-        // Add your custom logic here for purchase button action
-    }
 }
