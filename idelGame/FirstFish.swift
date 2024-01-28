@@ -4,6 +4,8 @@ import UIKit
 
 class FirstFishCard: UIView{
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    weak var viewController: ViewController?
+    
     var fishType = "Default_Name"
     var fishLevel: Int64 = 1
     var cost = 0.0
@@ -11,7 +13,8 @@ class FirstFishCard: UIView{
     var production = 0.0
     var productionMultiplier = 0.0
     
-    init() {
+    init(viewController: ViewController) {
+        self.viewController = viewController
         super.init(frame: .zero)
         getFish()
         setUpCard()
@@ -84,7 +87,17 @@ class FirstFishCard: UIView{
     }
     
     @objc private func breedButtonPressed() {
+        
         print("Breed button pressed")
+        do {
+            let players = try context.fetch(Player.fetchRequest())
+            players[0].balance += self.production
+            try context.save()
+            viewController?.getBalance()
+        } catch {
+            // Handle error
+        }
+        
         // Add your custom logic here for breed button action
     }
 

@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         ])
         let fishes = try! context.fetch(Fish.fetchRequest())
 
-        let guppyCard = FirstFishCard()
+        let guppyCard = FirstFishCard(viewController: self)
         guppyCard.translatesAutoresizingMaskIntoConstraints = false
         guppyCard.backgroundColor = .red
         
