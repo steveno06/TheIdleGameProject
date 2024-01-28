@@ -6,6 +6,8 @@ class FirstFishCard: UIView{
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     weak var viewController: ViewController?
     
+    var progressBar: UIProgressView?
+    
     var fishType = "Default_Name"
     var fishLevel: Int64 = 1
     var cost = 0.0
@@ -67,6 +69,8 @@ class FirstFishCard: UIView{
         addSubview(purchaseButton)
         addSubview(timerLabel)
         
+        
+        
         breedButton.translatesAutoresizingMaskIntoConstraints = false
         fishLevelLabel.translatesAutoresizingMaskIntoConstraints = false
         purchaseButton.translatesAutoresizingMaskIntoConstraints = false
@@ -101,7 +105,22 @@ class FirstFishCard: UIView{
             timerLabel.bottomAnchor.constraint(equalTo: purchaseButton.bottomAnchor),
             timerLabel.topAnchor.constraint(equalTo: purchaseButton.topAnchor)
         ])
+        
+        progressBar = UIProgressView(progressViewStyle: .default)
+        progressBar?.translatesAutoresizingMaskIntoConstraints = false
+        progressBar?.progress = 0.5
+        addSubview(progressBar!)
+        // Set the progress bar constraints
+        if let progressBar = progressBar {
+            NSLayoutConstraint.activate([
+                progressBar.leadingAnchor.constraint(equalTo: breedButton.trailingAnchor, constant: 10),
+                progressBar.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+                progressBar.topAnchor.constraint(equalTo: breedButton.topAnchor),
+                progressBar.bottomAnchor.constraint(equalTo: purchaseButton.topAnchor, constant: -10)
+            ])
+        }
     }
+    
     
     @objc private func breedButtonPressed() {
                 do {
