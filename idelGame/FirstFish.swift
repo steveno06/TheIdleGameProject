@@ -121,13 +121,31 @@ class FirstFishCard: UIView{
         }
     }
     
+    func updateProgressBar(duration: TimeInterval) {
+        guard let progressBar = progressBar else {
+            return
+        }
+
+        progressBar.progress = 0.0
+
+        // Use Timer to update the progress bar over time
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            progressBar.progress += 0.1 / Float(duration)
+
+            if progressBar.progress >= 1.0 {
+                timer.invalidate()
+                // Add any additional logic when the progress bar completes
+            }
+        }
+    }
     
     @objc private func breedButtonPressed() {
-                do {
+        do {
             let players = try context.fetch(Player.fetchRequest())
             players[0].balance += self.production
             try context.save()
             viewController?.getBalance()
+            updateProgressBar(duration: 5.0)
         } catch {
             // Handle error
         }
