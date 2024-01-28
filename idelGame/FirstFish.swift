@@ -55,19 +55,28 @@ class FirstFishCard: UIView{
             return button
         }()
         
+        let timerLabel: UILabel = {
+            let label = UILabel()
+            label.backgroundColor = .magenta
+            label.text = "timer"
+            return label
+        }()
+        
         addSubview(breedButton)
         addSubview(fishLevelLabel)
         addSubview(purchaseButton)
+        addSubview(timerLabel)
         
         breedButton.translatesAutoresizingMaskIntoConstraints = false
         fishLevelLabel.translatesAutoresizingMaskIntoConstraints = false
         purchaseButton.translatesAutoresizingMaskIntoConstraints = false
+        timerLabel.translatesAutoresizingMaskIntoConstraints = false
         
         //Breed Button
         NSLayoutConstraint.activate([
             breedButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             breedButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            breedButton.widthAnchor.constraint(equalToConstant: 100),
+            breedButton.widthAnchor.constraint(equalToConstant: 80),
             breedButton.heightAnchor.constraint(equalToConstant: 40)
         ])
         //Fish Level Label
@@ -79,17 +88,23 @@ class FirstFishCard: UIView{
         ])
         //Purchase Button
         NSLayoutConstraint.activate([
-            purchaseButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            purchaseButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            purchaseButton.widthAnchor.constraint(equalToConstant: 80),
+            purchaseButton.leadingAnchor.constraint(equalTo: breedButton.trailingAnchor, constant: 10),
+            purchaseButton.bottomAnchor.constraint(equalTo: fishLevelLabel.bottomAnchor),
+            purchaseButton.widthAnchor.constraint(equalToConstant: 175),
             purchaseButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
+        //Timer Label
+        NSLayoutConstraint.activate([
+            timerLabel.leadingAnchor.constraint(equalTo: purchaseButton.trailingAnchor,constant: 10),
+            timerLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            timerLabel.bottomAnchor.constraint(equalTo: purchaseButton.bottomAnchor),
+            timerLabel.topAnchor.constraint(equalTo: purchaseButton.topAnchor)
         ])
     }
     
     @objc private func breedButtonPressed() {
-        
-        print("Breed button pressed")
-        do {
+                do {
             let players = try context.fetch(Player.fetchRequest())
             players[0].balance += self.production
             try context.save()

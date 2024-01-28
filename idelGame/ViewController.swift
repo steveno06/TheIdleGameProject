@@ -38,12 +38,6 @@ class ViewController: UIViewController {
     }
 
     private func setupUI() {
-
-        
-
-
-        
-        
         // Balance Title
         view.addSubview(balanceTitle)
         balanceTitle.translatesAutoresizingMaskIntoConstraints = false
@@ -53,11 +47,13 @@ class ViewController: UIViewController {
             balanceTitle.widthAnchor.constraint(equalToConstant: 200),
             balanceTitle.heightAnchor.constraint(equalToConstant: 50)
         ])
-        let fishes = try! context.fetch(Fish.fetchRequest())
 
         let guppyCard = FirstFishCard(viewController: self)
         guppyCard.translatesAutoresizingMaskIntoConstraints = false
-        guppyCard.backgroundColor = .red
+        guppyCard.backgroundColor = .systemMint
+        guppyCard.layer.cornerRadius = 10
+        guppyCard.layer.borderWidth = 2.0
+        guppyCard.layer.borderColor = UIColor.black.cgColor
         
         view.addSubview(guppyCard)
         NSLayoutConstraint.activate([
@@ -78,20 +74,6 @@ class ViewController: UIViewController {
 //            goldFishCard.topAnchor.constraint(equalTo: guppyCard.bottomAnchor, constant: 10),
 //            goldFishCard.heightAnchor.constraint(equalToConstant: 100)
 //        ])
-        
-
-        
-
-        // Button
-        view.addSubview(actionButton)
-        actionButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            actionButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            actionButton.topAnchor.constraint(equalTo: balanceTitle.bottomAnchor, constant: 100),
-            actionButton.widthAnchor.constraint(equalToConstant: 200),
-            actionButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
         view.addSubview(deleteButton)
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
