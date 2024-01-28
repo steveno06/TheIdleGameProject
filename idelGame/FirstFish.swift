@@ -108,7 +108,7 @@ class FirstFishCard: UIView{
         
         progressBar = UIProgressView(progressViewStyle: .default)
         progressBar?.translatesAutoresizingMaskIntoConstraints = false
-        progressBar?.progress = 0.5
+        progressBar?.progress = 0.0
         addSubview(progressBar!)
         // Set the progress bar constraints
         if let progressBar = progressBar {
@@ -136,6 +136,8 @@ class FirstFishCard: UIView{
                     timer.invalidate()
                     progressBar.progress = 0.0
                     self.isInProgress = false
+                    self.breedCompleted()
+                    
                     // Add any additional logic when the progress bar completes
                 }
             }
@@ -145,18 +147,19 @@ class FirstFishCard: UIView{
         }
 
     }
-    
-    @objc private func breedButtonPressed() {
-        do {
+    func breedCompleted(){
+        do{
             let players = try context.fetch(Player.fetchRequest())
             players[0].balance += self.production
             try context.save()
             viewController?.getBalance()
-            updateProgressBar(duration: 5.0)
-        } catch {
-            // Handle error
         }
-        
+        catch{
+            
+        }
+    }
+    @objc private func breedButtonPressed() {
+        updateProgressBar(duration: 5.0)
         // Add your custom logic here for breed button action
     }
 
