@@ -7,7 +7,7 @@ class FirstFishCard: UIView{
     weak var viewController: ViewController?
     
     var progressBar: UIProgressView?
-    
+    var isInProgress: Bool = false
     var fishType = "Default_Name"
     var fishLevel: Int64 = 1
     var cost = 0.0
@@ -125,18 +125,25 @@ class FirstFishCard: UIView{
         guard let progressBar = progressBar else {
             return
         }
+        if isInProgress == false{
+            self.isInProgress = true
+            progressBar.progress = 0.0
+            // Use Timer to update the progress bar over time
+            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+                progressBar.progress += 0.1 / Float(duration)
 
-        progressBar.progress = 0.0
-
-        // Use Timer to update the progress bar over time
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-            progressBar.progress += 0.1 / Float(duration)
-
-            if progressBar.progress >= 1.0 {
-                timer.invalidate()
-                // Add any additional logic when the progress bar completes
+                if progressBar.progress >= 1.0 {
+                    timer.invalidate()
+                    progressBar.progress = 0.0
+                    self.isInProgress = false
+                    // Add any additional logic when the progress bar completes
+                }
             }
         }
+        else{
+            print("in progress")
+        }
+
     }
     
     @objc private func breedButtonPressed() {
