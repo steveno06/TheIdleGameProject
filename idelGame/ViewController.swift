@@ -29,12 +29,21 @@ class ViewController: UIViewController {
         button.addTarget(self, action: #selector(removeAllData), for: .touchUpInside)
         return button
     }()
+    
+    private let logOffLabel: UILabel = {
+        let label = UILabel()
+        label.text = "time"
+        label.backgroundColor = .cyan
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         setupUI()
         getBalance()
         getFish()
+        getLastLogOff()
     }
 
     private func setupUI() {
@@ -82,10 +91,20 @@ class ViewController: UIViewController {
             deleteButton.widthAnchor.constraint(equalToConstant: 200),
             deleteButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+        
+        view.addSubview(logOffLabel)
+        logOffLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            logOffLabel.widthAnchor.constraint(equalToConstant: 200),
+            logOffLabel.heightAnchor.constraint(equalToConstant: 50),
+            logOffLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logOffLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
 
     func getBalance() {
         print("get balance")
+        print(Date())
         do {
             let players = try context.fetch(Player.fetchRequest())
             print(String(players.count))
@@ -114,6 +133,22 @@ class ViewController: UIViewController {
                 for fish in fishes{
                     print(fish.fishType!)
                 }
+            }
+        }
+        catch{
+            
+        }
+    }
+    
+    func getLastLogOff(){
+        do{
+            let timeTracked = try context.fetch(TimerStateManager.fetchRequest())
+            if timeTracked.isEmpty{
+                print("fatal timer error")
+            }
+            else{
+                logOffLabel.text = String(describing: timeTracked[0].timeOfLogOff!)
+                
             }
         }
         catch{
@@ -181,6 +216,13 @@ class ViewController: UIViewController {
                         
             
             try context.execute(batchDeleteRequest)
+            
+            // Remove data for TimerStateManager entity
+            let timerFetchRequest: NSFetchRequest<NSFetchRequestResult> = TimerStateManager.fetchRequest()
+            let timerBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: timerFetchRequest)
+            
+            try context.execute(timerBatchDeleteRequest)
+            
             try context.save()
             
             // Reset your balance or perform any other necessary actions
