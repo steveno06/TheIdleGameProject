@@ -36,6 +36,13 @@ class ViewController: UIViewController {
         label.backgroundColor = .cyan
         return label
     }()
+    
+    private let progressBarState: UILabel = {
+        let label = UILabel()
+        label.text = "text"
+        label.backgroundColor = .red
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()

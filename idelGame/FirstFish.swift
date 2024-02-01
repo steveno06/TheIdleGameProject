@@ -7,6 +7,8 @@ class FirstFishCard: UIView{
     weak var viewController: ViewController?
     
     var progressBar: UIProgressView?
+    var progressBarTimer: Timer?
+    
     var isInProgress: Bool = false
     var fishType = "Default_Name"
     var fishLevel: Int64 = 1
@@ -128,10 +130,43 @@ class FirstFishCard: UIView{
         if isInProgress == false{
             self.isInProgress = true
             progressBar.progress = 0.0
+            var totalTimeInterval: TimeInterval = 0.0
+            var roundedTotalTimeInterval = 0.0
             // Use Timer to update the progress bar over time
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            progressBarTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                 progressBar.progress += 0.1 / Float(duration)
+                
 
+            
+                totalTimeInterval += timer.timeInterval
+                roundedTotalTimeInterval = round(100 * totalTimeInterval) / 100
+                
+                if roundedTotalTimeInterval.truncatingRemainder(dividingBy: 1) == 0 {
+
+                    // The value is a whole number
+                    print(roundedTotalTimeInterval)
+                    do{
+                        let gameState = try self.context.fetch(GameStateManager.fetchRequest())
+                        if gameState.isEmpty{
+                            let newFirstFishState = GameStateManager(context: self.context)
+                            newFirstFishState.firstFishStatus = Int64(roundedTotalTimeInterval)
+                            try self.context.save()
+                        }
+                        else{
+                            gameState[0].firstFishStatus = Int64(roundedTotalTimeInterval)
+                            try self.context.save()
+                        }
+                    }
+                    
+                    catch{
+                        print("error saving state of progress bar")
+                    }
+                    
+                    if roundedTotalTimeInterval == 3.0 {
+                        self.stopProgressBarTimer()
+                    }
+                }
+                
                 if progressBar.progress >= 1.0 {
                     timer.invalidate()
                     progressBar.progress = 0.0
@@ -184,6 +219,12 @@ class FirstFishCard: UIView{
         catch{
             print("error retrieving fish")
         }
+    }
+    
+    @objc func stopProgressBarTimer() {
+        progressBarTimer?.invalidate()
+        progressBarTimer = nil
+        isInProgress = false
     }
     
 }
