@@ -147,7 +147,10 @@ class ViewController: UIViewController {
                 print("fatal timer error")
             }
             else{
-                logOffLabel.text = String(describing: timeTracked[0].timeOfLogOff!)
+                let startDate = timeTracked[0].timeOfLogOff!
+                let secondDate = Date()
+                let differenceInSeconds: Int = secondsBetweenDates(startDate: startDate, endDate: secondDate)
+                logOffLabel.text = "\(differenceInSeconds) Seconds Have Passed"
                 
             }
         }
@@ -235,4 +238,8 @@ class ViewController: UIViewController {
         }
     }
     
+    func secondsBetweenDates(startDate: Date, endDate: Date) -> Int {
+        let timeInterval = endDate.timeIntervalSince(startDate)
+        return Int(timeInterval)
+    }
 }
