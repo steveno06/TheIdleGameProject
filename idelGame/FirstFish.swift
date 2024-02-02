@@ -8,6 +8,7 @@ class FirstFishCard: UIView{
     
     var progressBar: UIProgressView?
     var progressBarTimer: Timer?
+    var currentSecond: Int64 = 0
     
     var isInProgress: Bool = false
     var fishType = "Default_Name"
@@ -142,20 +143,11 @@ class FirstFishCard: UIView{
                 roundedTotalTimeInterval = round(100 * totalTimeInterval) / 100
                 
                 if roundedTotalTimeInterval.truncatingRemainder(dividingBy: 1) == 0 {
-
+                    self.currentSecond = Int64(roundedTotalTimeInterval)
                     // The value is a whole number
                     print(roundedTotalTimeInterval)
                     do{
-                        let gameState = try self.context.fetch(GameStateManager.fetchRequest())
-                        if gameState.isEmpty{
-                            let newFirstFishState = GameStateManager(context: self.context)
-                            newFirstFishState.firstFishStatus = Int64(roundedTotalTimeInterval)
-                            try self.context.save()
-                        }
-                        else{
-                            gameState[0].firstFishStatus = Int64(roundedTotalTimeInterval)
-                            try self.context.save()
-                        }
+                        
                     }
                     
                     catch{
@@ -218,6 +210,25 @@ class FirstFishCard: UIView{
     }
     
     @objc func stopProgressBarTimer() {
+        
+        do{
+            print("The last status before interuption--", String(self.currentSecond))
+            let gameState = try self.context.fetch(GameStateManager.fetchRequest())
+            if gameState.isEmpty{
+                let newFirstFishState = GameStateManager(context: self.context)
+                newFirstFishState.firstFishStatus = self.currentSecond
+                try self.context.save()
+            }
+            else{
+                gameState[0].firstFishStatus = self.currentSecond
+                try self.context.save()
+            }
+            
+        }
+        catch{
+            
+        }
+        
         progressBarTimer?.invalidate()
         progressBarTimer = nil
         isInProgress = false

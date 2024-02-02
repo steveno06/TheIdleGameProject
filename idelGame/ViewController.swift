@@ -268,6 +268,16 @@ class ViewController: UIViewController {
     
     @objc func stopTimerBar(){
         self.firstFish?.stopProgressBarTimer()
+        
+        do{
+            let gameState = try self.context.fetch(GameStateManager.fetchRequest())
+            print("From The view controller--", gameState[0].firstFishStatus)
+
+        }
+        catch{
+            
+        }
+        
     }
     
     func secondsBetweenDates(startDate: Date, endDate: Date) -> Int {
