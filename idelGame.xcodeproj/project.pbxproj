@@ -23,6 +23,8 @@
 		9A5466522B6A75E10046F294 /* TimerStateManager+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466502B6A75E10046F294 /* TimerStateManager+CoreDataProperties.swift */; };
 		9A5466552B6C56B80046F294 /* GameStateManager+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466532B6C56B80046F294 /* GameStateManager+CoreDataClass.swift */; };
 		9A5466562B6C56B80046F294 /* GameStateManager+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466542B6C56B80046F294 /* GameStateManager+CoreDataProperties.swift */; };
+		9A5466592B6D994A0046F294 /* ManagerList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466572B6D994A0046F294 /* ManagerList+CoreDataClass.swift */; };
+		9A54665A2B6D994A0046F294 /* ManagerList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466582B6D994A0046F294 /* ManagerList+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		9A5466502B6A75E10046F294 /* TimerStateManager+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerStateManager+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9A5466532B6C56B80046F294 /* GameStateManager+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameStateManager+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9A5466542B6C56B80046F294 /* GameStateManager+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameStateManager+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9A5466572B6D994A0046F294 /* ManagerList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagerList+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9A5466582B6D994A0046F294 /* ManagerList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagerList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,8 @@
 		9A5466222B62D08E0046F294 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9A5466572B6D994A0046F294 /* ManagerList+CoreDataClass.swift */,
+				9A5466582B6D994A0046F294 /* ManagerList+CoreDataProperties.swift */,
 				9A5466532B6C56B80046F294 /* GameStateManager+CoreDataClass.swift */,
 				9A5466542B6C56B80046F294 /* GameStateManager+CoreDataProperties.swift */,
 				9A54664F2B6A75E10046F294 /* TimerStateManager+CoreDataClass.swift */,
@@ -176,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A5466282B633A510046F294 /* Fish+CoreDataProperties.swift in Sources */,
+				9A54665A2B6D994A0046F294 /* ManagerList+CoreDataProperties.swift in Sources */,
 				9A54660C2B604E370046F294 /* ViewController.swift in Sources */,
 				9A5466272B633A510046F294 /* Fish+CoreDataClass.swift in Sources */,
 				9A5466202B62CF870046F294 /* Player+CoreDataClass.swift in Sources */,
@@ -183,6 +190,7 @@
 				9A5466522B6A75E10046F294 /* TimerStateManager+CoreDataProperties.swift in Sources */,
 				9A5466122B604E370046F294 /* idelGame.xcdatamodeld in Sources */,
 				9A5466512B6A75E10046F294 /* TimerStateManager+CoreDataClass.swift in Sources */,
+				9A5466592B6D994A0046F294 /* ManagerList+CoreDataClass.swift in Sources */,
 				9A54662A2B65C7440046F294 /* FirstFish.swift in Sources */,
 				9A5466562B6C56B80046F294 /* GameStateManager+CoreDataProperties.swift in Sources */,
 				9A5466082B604E370046F294 /* AppDelegate.swift in Sources */,

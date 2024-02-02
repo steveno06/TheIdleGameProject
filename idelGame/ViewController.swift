@@ -53,6 +53,14 @@ class ViewController: UIViewController {
         button.addTarget(self, action: #selector(stopTimerBar), for: .touchUpInside)
         return button
     }()
+    
+    private let buyManagerButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Buy Manafer", for: .normal)
+        button.configuration = .bordered()
+        button.addTarget(self, action: #selector(buyManager), for:  .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,6 +133,15 @@ class ViewController: UIViewController {
             stopTimerButton.heightAnchor.constraint(equalToConstant: 50),
             stopTimerButton.topAnchor.constraint(equalTo: logOffLabel.bottomAnchor, constant: 10),
             stopTimerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        view.addSubview(buyManagerButton)
+        buyManagerButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            buyManagerButton.widthAnchor.constraint(equalToConstant: 100),
+            buyManagerButton.heightAnchor.constraint(equalToConstant: 50),
+            buyManagerButton.topAnchor.constraint(equalTo: stopTimerButton.bottomAnchor, constant: 10),
+            buyManagerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
         return guppyCard
@@ -254,6 +271,11 @@ class ViewController: UIViewController {
             
             try context.execute(timerBatchDeleteRequest)
             
+            let managersFetchRequest: NSFetchRequest<NSFetchRequestResult> = ManagerList.fetchRequest()
+            let managersBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: managersFetchRequest)
+            
+            try context.execute(managersBatchDeleteRequest)
+            
             try context.save()
             
             // Reset your balance or perform any other necessary actions
@@ -283,5 +305,21 @@ class ViewController: UIViewController {
     func secondsBetweenDates(startDate: Date, endDate: Date) -> Int {
         let timeInterval = endDate.timeIntervalSince(startDate)
         return Int(timeInterval)
+    }
+    
+    @objc func buyManager(){
+        do{
+            let managerStates = try self.context.fetch(ManagerList.fetchRequest())
+            if managerStates.isEmpty{
+                let manager = ManagerList(context: context)
+                try context.save()
+            }
+            else{
+                managerStates[0].firstFishHasManager = true
+            }
+        }
+        catch{
+            print("error buying manager")
+        }
     }
 }

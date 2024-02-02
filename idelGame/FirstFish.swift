@@ -10,6 +10,8 @@ class FirstFishCard: UIView{
     var progressBarTimer: Timer?
     var currentSecond: Int64 = 0
     
+    var hasManager: Bool = false
+    
     var isInProgress: Bool = false
     var fishType = "Default_Name"
     var fishLevel: Int64 = 1
@@ -144,22 +146,35 @@ class FirstFishCard: UIView{
                 
                 if roundedTotalTimeInterval.truncatingRemainder(dividingBy: 1) == 0 {
                     self.currentSecond = Int64(roundedTotalTimeInterval)
-                    // The value is a whole number
-                    print(roundedTotalTimeInterval)
-                    do{
-                        
-                    }
-                    
-                    catch{
-                        print("error saving state of progress bar")
-                    }
                 }
                 
                 if progressBar.progress >= 1.0 {
-                    timer.invalidate()
-                    progressBar.progress = 0.0
-                    self.isInProgress = false
-                    self.breedCompleted()
+                    do{
+                        let managerStates = try self.context.fetch(ManagerList.fetchRequest())
+                        if managerStates.isEmpty{
+                            let managers = ManagerList(context: self.context)
+                            try self.context.save()
+                        }
+                        else{
+                            self.hasManager = managerStates[0].firstFishHasManager
+                        }
+                    }
+                    catch{
+                        
+                    }
+                    
+                    if(self.hasManager){
+                        progressBar.progress = 0.0
+                        self.breedCompleted()
+                    }
+                    else{
+                        timer.invalidate()
+                        progressBar.progress = 0.0
+                        self.isInProgress = false
+                        self.breedCompleted()
+                    }
+                    
+                    
                     
                     // Add any additional logic when the progress bar completes
                 }
@@ -233,6 +248,7 @@ class FirstFishCard: UIView{
         progressBarTimer = nil
         isInProgress = false
     }
+    
     
 }
 

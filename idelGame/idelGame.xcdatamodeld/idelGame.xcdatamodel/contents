@@ -11,6 +11,9 @@
     <entity name="GameStateManager" representedClassName=".GameStateManager" syncable="YES">
         <attribute name="firstFishStatus" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
+    <entity name="ManagerList" representedClassName=".ManagerList" syncable="YES">
+        <attribute name="firstFishHasManager" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+    </entity>
     <entity name="Player" representedClassName=".Player" syncable="YES">
         <attribute name="balance" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="totalBalanceMade" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
