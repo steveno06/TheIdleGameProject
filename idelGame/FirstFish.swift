@@ -161,10 +161,6 @@ class FirstFishCard: UIView{
                     catch{
                         print("error saving state of progress bar")
                     }
-                    
-                    if roundedTotalTimeInterval == 3.0 {
-                        self.stopProgressBarTimer()
-                    }
                 }
                 
                 if progressBar.progress >= 1.0 {

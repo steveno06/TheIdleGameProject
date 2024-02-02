@@ -5,6 +5,8 @@ class ViewController: UIViewController {
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var balance: Double = 0
+    
+    var firstFish: FirstFishCard?
 
     private let balanceTitle: UILabel = {
         let label = UILabel()
@@ -43,17 +45,25 @@ class ViewController: UIViewController {
         label.backgroundColor = .red
         return label
     }()
+        
+    private let stopTimerButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Stop Timer", for: .normal)
+        button.configuration = .bordered()
+        button.addTarget(self, action: #selector(stopTimerBar), for: .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupUI()
+        self.firstFish = setupUI()
         getBalance()
         getFish()
         getLastLogOff()
     }
 
-    private func setupUI() {
+    private func setupUI() -> FirstFishCard {
         // Balance Title
         view.addSubview(balanceTitle)
         balanceTitle.translatesAutoresizingMaskIntoConstraints = false
@@ -107,6 +117,17 @@ class ViewController: UIViewController {
             logOffLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logOffLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+        
+        view.addSubview(stopTimerButton)
+        stopTimerButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stopTimerButton.widthAnchor.constraint(equalToConstant: 100),
+            stopTimerButton.heightAnchor.constraint(equalToConstant: 50),
+            stopTimerButton.topAnchor.constraint(equalTo: logOffLabel.bottomAnchor, constant: 10),
+            stopTimerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        return guppyCard
     }
 
     func getBalance() {
@@ -243,6 +264,10 @@ class ViewController: UIViewController {
         } catch {
             print("Failed to remove all data: \(error)")
         }
+    }
+    
+    @objc func stopTimerBar(){
+        self.firstFish?.stopProgressBarTimer()
     }
     
     func secondsBetweenDates(startDate: Date, endDate: Date) -> Int {
