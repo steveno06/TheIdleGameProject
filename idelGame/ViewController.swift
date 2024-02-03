@@ -5,6 +5,8 @@ class ViewController: UIViewController {
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var balance: Double = 0
+    
+    var firstFish: FirstFishCard?
 
     private let balanceTitle: UILabel = {
         let label = UILabel()
@@ -29,15 +31,47 @@ class ViewController: UIViewController {
         button.addTarget(self, action: #selector(removeAllData), for: .touchUpInside)
         return button
     }()
+    
+    private let logOffLabel: UILabel = {
+        let label = UILabel()
+        label.text = "time"
+        label.backgroundColor = .cyan
+        return label
+    }()
+    
+    private let progressBarState: UILabel = {
+        let label = UILabel()
+        label.text = "text"
+        label.backgroundColor = .red
+        return label
+    }()
+        
+    private let stopTimerButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Stop Timer", for: .normal)
+        button.configuration = .bordered()
+        button.addTarget(self, action: #selector(stopTimerBar), for: .touchUpInside)
+        return button
+    }()
+    
+    private let buyManagerButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Buy Manafer", for: .normal)
+        button.configuration = .bordered()
+        button.addTarget(self, action: #selector(buyManager), for:  .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        view.backgroundColor = .white
+        self.firstFish = setupUI()
         getBalance()
         getFish()
+        getLastLogOff()
     }
 
-    private func setupUI() {
+    private func setupUI() -> FirstFishCard {
         // Balance Title
         view.addSubview(balanceTitle)
         balanceTitle.translatesAutoresizingMaskIntoConstraints = false
@@ -82,10 +116,40 @@ class ViewController: UIViewController {
             deleteButton.widthAnchor.constraint(equalToConstant: 200),
             deleteButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+        
+        view.addSubview(logOffLabel)
+        logOffLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            logOffLabel.widthAnchor.constraint(equalToConstant: 200),
+            logOffLabel.heightAnchor.constraint(equalToConstant: 50),
+            logOffLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logOffLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        
+        view.addSubview(stopTimerButton)
+        stopTimerButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stopTimerButton.widthAnchor.constraint(equalToConstant: 100),
+            stopTimerButton.heightAnchor.constraint(equalToConstant: 50),
+            stopTimerButton.topAnchor.constraint(equalTo: logOffLabel.bottomAnchor, constant: 10),
+            stopTimerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        view.addSubview(buyManagerButton)
+        buyManagerButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            buyManagerButton.widthAnchor.constraint(equalToConstant: 100),
+            buyManagerButton.heightAnchor.constraint(equalToConstant: 50),
+            buyManagerButton.topAnchor.constraint(equalTo: stopTimerButton.bottomAnchor, constant: 10),
+            buyManagerButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        return guppyCard
     }
 
     func getBalance() {
         print("get balance")
+        print(Date())
         do {
             let players = try context.fetch(Player.fetchRequest())
             print(String(players.count))
@@ -114,6 +178,25 @@ class ViewController: UIViewController {
                 for fish in fishes{
                     print(fish.fishType!)
                 }
+            }
+        }
+        catch{
+            
+        }
+    }
+    
+    func getLastLogOff(){
+        do{
+            let timeTracked = try context.fetch(TimerStateManager.fetchRequest())
+            if timeTracked.isEmpty{
+                print("fatal timer error")
+            }
+            else{
+                let startDate = timeTracked[0].timeOfLogOff!
+                let secondDate = Date()
+                let differenceInSeconds: Int = secondsBetweenDates(startDate: startDate, endDate: secondDate)
+                logOffLabel.text = "\(differenceInSeconds) Seconds Have Passed"
+                
             }
         }
         catch{
@@ -181,6 +264,23 @@ class ViewController: UIViewController {
                         
             
             try context.execute(batchDeleteRequest)
+            
+            // Remove data for TimerStateManager entity
+            let timerFetchRequest: NSFetchRequest<NSFetchRequestResult> = TimerStateManager.fetchRequest()
+            let timerBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: timerFetchRequest)
+            
+            try context.execute(timerBatchDeleteRequest)
+            
+            let managersFetchRequest: NSFetchRequest<NSFetchRequestResult> = ManagerList.fetchRequest()
+            let managersBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: managersFetchRequest)
+            
+            try context.execute(managersBatchDeleteRequest)
+            
+            let progressFetchRequest: NSFetchRequest<NSFetchRequestResult> = GameStateManager.fetchRequest()
+            let progressBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: progressFetchRequest)
+            
+            try context.execute(progressBatchDeleteRequest)
+            
             try context.save()
             
             // Reset your balance or perform any other necessary actions
@@ -193,4 +293,39 @@ class ViewController: UIViewController {
         }
     }
     
+    @objc func stopTimerBar(){
+        print("it happned with the disconnect")
+        self.firstFish?.stopProgressBarTimer()
+        self.firstFish?.isInProgress = false
+        do{
+            let gameState = try self.context.fetch(GameStateManager.fetchRequest())
+            print("From The view controller--", gameState[0].firstFishStatus)
+
+        }
+        catch{
+            
+        }
+        
+    }
+    
+    func secondsBetweenDates(startDate: Date, endDate: Date) -> Int {
+        let timeInterval = endDate.timeIntervalSince(startDate)
+        return Int(timeInterval)
+    }
+    
+    @objc func buyManager(){
+        do{
+            let managerStates = try self.context.fetch(ManagerList.fetchRequest())
+            if managerStates.isEmpty{
+                let manager = ManagerList(context: context)
+                try context.save()
+            }
+            else{
+                managerStates[0].firstFishHasManager = true
+            }
+        }
+        catch{
+            print("error buying manager")
+        }
+    }
 }

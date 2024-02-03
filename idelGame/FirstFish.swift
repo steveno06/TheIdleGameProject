@@ -7,6 +7,11 @@ class FirstFishCard: UIView{
     weak var viewController: ViewController?
     
     var progressBar: UIProgressView?
+    var progressBarTimer: Timer?
+    var currentSecond: Int64 = 0
+    
+    var hasManager: Bool = false
+    
     var isInProgress: Bool = false
     var fishType = "Default_Name"
     var fishLevel: Int64 = 1
@@ -121,27 +126,70 @@ class FirstFishCard: UIView{
         }
     }
     
-    func updateProgressBar(duration: TimeInterval) {
+    func startProgressBar(duration: TimeInterval, startTime: Int64) {
         guard let progressBar = progressBar else {
             return
         }
+        
+        progressBar.progress = Float(startTime) / Float(duration)
+        
         if isInProgress == false{
             self.isInProgress = true
-            progressBar.progress = 0.0
+            var totalTimeInterval: TimeInterval = Double(startTime)
+            var roundedTotalTimeInterval = 0.0
             // Use Timer to update the progress bar over time
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            progressBarTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                 progressBar.progress += 0.1 / Float(duration)
-
+                
+                
+                
+                
+                roundedTotalTimeInterval = round(100 * totalTimeInterval) / 100
+                totalTimeInterval += timer.timeInterval
+                
+                if roundedTotalTimeInterval.truncatingRemainder(dividingBy: 1) == 0 {
+                    self.currentSecond = Int64(roundedTotalTimeInterval)
+                }
+                
                 if progressBar.progress >= 1.0 {
-                    timer.invalidate()
-                    progressBar.progress = 0.0
-                    self.isInProgress = false
-                    self.breedCompleted()
+                    do{
+                        let managerStates = try self.context.fetch(ManagerList.fetchRequest())
+                        if managerStates.isEmpty{
+                            let managers = ManagerList(context: self.context)
+                            try self.context.save()
+                        }
+                        else{
+                            self.hasManager = managerStates[0].firstFishHasManager
+                        }
+                    }
+                    catch{
+                        
+                    }
+                    
+                    if(self.hasManager){
+                        progressBar.progress = 0.0
+                        totalTimeInterval = 0.0
+                        self.isInProgress = true
+                        self.resetProgressStatus()
+                        self.currentSecond = 0
+                        self.breedCompleted()
+                    }
+                    else{
+                        timer.invalidate()
+                        progressBar.progress = 0.0
+                        self.isInProgress = false
+                        self.resetProgressStatus()
+                        self.currentSecond = 0
+                        self.breedCompleted()
+                    }
+                    
+                    
                     
                     // Add any additional logic when the progress bar completes
                 }
             }
         }
+        
         else{
             print("in progress")
         }
@@ -159,7 +207,28 @@ class FirstFishCard: UIView{
         }
     }
     @objc private func breedButtonPressed() {
-        updateProgressBar(duration: 5.0)
+        
+        if isInProgress == false{
+            do{
+                let firstFishState = try self.context.fetch(GameStateManager.fetchRequest())
+                var startTime: Int64 = 0
+                if firstFishState.isEmpty{
+                    let newFirstFishState = GameStateManager(context: self.context)
+                    newFirstFishState.firstFishStatus = 0
+                    try self.context.save()
+                }
+                else{
+                    startTime = firstFishState[0].firstFishStatus
+                }
+                
+                startProgressBar(duration: 5.0, startTime: startTime)
+            }
+            catch{
+                
+            }
+        }
+        
+        
         // Add your custom logic here for breed button action
     }
 
@@ -185,6 +254,43 @@ class FirstFishCard: UIView{
             print("error retrieving fish")
         }
     }
+    
+    @objc func stopProgressBarTimer() {
+        
+        do{
+            print("The last status before interuption--", String(self.currentSecond))
+            let gameState = try self.context.fetch(GameStateManager.fetchRequest())
+            if gameState.isEmpty{
+                let newFirstFishState = GameStateManager(context: self.context)
+                newFirstFishState.firstFishStatus = self.currentSecond
+                try self.context.save()
+            }
+            else{
+                gameState[0].firstFishStatus = self.currentSecond
+                try self.context.save()
+            }
+            
+        }
+        catch{
+            
+        }
+        
+        progressBarTimer?.invalidate()
+        progressBarTimer = nil
+        isInProgress = false
+    }
+    func resetProgressStatus(){
+        do{
+            print("setting to zero")
+            let firstFishState = try self.context.fetch(GameStateManager.fetchRequest())
+            firstFishState[0].firstFishStatus = 0
+            try self.context.save()
+        }
+        catch{
+            print("Error Saving Progress Staus")
+        }
+    }
+    
     
 }
 

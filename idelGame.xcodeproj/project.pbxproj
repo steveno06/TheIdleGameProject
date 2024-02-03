@@ -10,7 +10,6 @@
 		9A5466082B604E370046F294 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466072B604E370046F294 /* AppDelegate.swift */; };
 		9A54660A2B604E370046F294 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466092B604E370046F294 /* SceneDelegate.swift */; };
 		9A54660C2B604E370046F294 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A54660B2B604E370046F294 /* ViewController.swift */; };
-		9A54660F2B604E370046F294 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A54660D2B604E370046F294 /* Main.storyboard */; };
 		9A5466122B604E370046F294 /* idelGame.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466102B604E370046F294 /* idelGame.xcdatamodeld */; };
 		9A5466142B604E390046F294 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A5466132B604E390046F294 /* Assets.xcassets */; };
 		9A5466172B604E390046F294 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A5466152B604E390046F294 /* LaunchScreen.storyboard */; };
@@ -20,6 +19,12 @@
 		9A5466272B633A510046F294 /* Fish+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466252B633A510046F294 /* Fish+CoreDataClass.swift */; };
 		9A5466282B633A510046F294 /* Fish+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466262B633A510046F294 /* Fish+CoreDataProperties.swift */; };
 		9A54662A2B65C7440046F294 /* FirstFish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466292B65C7430046F294 /* FirstFish.swift */; };
+		9A5466512B6A75E10046F294 /* TimerStateManager+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A54664F2B6A75E10046F294 /* TimerStateManager+CoreDataClass.swift */; };
+		9A5466522B6A75E10046F294 /* TimerStateManager+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466502B6A75E10046F294 /* TimerStateManager+CoreDataProperties.swift */; };
+		9A5466552B6C56B80046F294 /* GameStateManager+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466532B6C56B80046F294 /* GameStateManager+CoreDataClass.swift */; };
+		9A5466562B6C56B80046F294 /* GameStateManager+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466542B6C56B80046F294 /* GameStateManager+CoreDataProperties.swift */; };
+		9A5466592B6D994A0046F294 /* ManagerList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466572B6D994A0046F294 /* ManagerList+CoreDataClass.swift */; };
+		9A54665A2B6D994A0046F294 /* ManagerList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5466582B6D994A0046F294 /* ManagerList+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +32,6 @@
 		9A5466072B604E370046F294 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A5466092B604E370046F294 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9A54660B2B604E370046F294 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		9A54660E2B604E370046F294 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9A5466112B604E370046F294 /* idelGame.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = idelGame.xcdatamodel; sourceTree = "<group>"; };
 		9A5466132B604E390046F294 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A5466162B604E390046F294 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -38,6 +42,12 @@
 		9A5466252B633A510046F294 /* Fish+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fish+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9A5466262B633A510046F294 /* Fish+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fish+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9A5466292B65C7430046F294 /* FirstFish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstFish.swift; sourceTree = "<group>"; };
+		9A54664F2B6A75E10046F294 /* TimerStateManager+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerStateManager+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9A5466502B6A75E10046F294 /* TimerStateManager+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimerStateManager+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9A5466532B6C56B80046F294 /* GameStateManager+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameStateManager+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9A5466542B6C56B80046F294 /* GameStateManager+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameStateManager+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9A5466572B6D994A0046F294 /* ManagerList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagerList+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9A5466582B6D994A0046F294 /* ManagerList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ManagerList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +84,6 @@
 				9A5466072B604E370046F294 /* AppDelegate.swift */,
 				9A5466092B604E370046F294 /* SceneDelegate.swift */,
 				9A54660B2B604E370046F294 /* ViewController.swift */,
-				9A54660D2B604E370046F294 /* Main.storyboard */,
 				9A5466132B604E390046F294 /* Assets.xcassets */,
 				9A5466152B604E390046F294 /* LaunchScreen.storyboard */,
 				9A5466182B604E390046F294 /* Info.plist */,
@@ -88,6 +97,12 @@
 		9A5466222B62D08E0046F294 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9A5466572B6D994A0046F294 /* ManagerList+CoreDataClass.swift */,
+				9A5466582B6D994A0046F294 /* ManagerList+CoreDataProperties.swift */,
+				9A5466532B6C56B80046F294 /* GameStateManager+CoreDataClass.swift */,
+				9A5466542B6C56B80046F294 /* GameStateManager+CoreDataProperties.swift */,
+				9A54664F2B6A75E10046F294 /* TimerStateManager+CoreDataClass.swift */,
+				9A5466502B6A75E10046F294 /* TimerStateManager+CoreDataProperties.swift */,
 				9A5466252B633A510046F294 /* Fish+CoreDataClass.swift */,
 				9A5466262B633A510046F294 /* Fish+CoreDataProperties.swift */,
 				9A54661E2B62CF870046F294 /* Player+CoreDataClass.swift */,
@@ -156,7 +171,6 @@
 			files = (
 				9A5466172B604E390046F294 /* LaunchScreen.storyboard in Resources */,
 				9A5466142B604E390046F294 /* Assets.xcassets in Resources */,
-				9A54660F2B604E370046F294 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,14 +182,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A5466282B633A510046F294 /* Fish+CoreDataProperties.swift in Sources */,
+				9A54665A2B6D994A0046F294 /* ManagerList+CoreDataProperties.swift in Sources */,
 				9A54660C2B604E370046F294 /* ViewController.swift in Sources */,
 				9A5466272B633A510046F294 /* Fish+CoreDataClass.swift in Sources */,
 				9A5466202B62CF870046F294 /* Player+CoreDataClass.swift in Sources */,
 				9A5466212B62CF870046F294 /* Player+CoreDataProperties.swift in Sources */,
+				9A5466522B6A75E10046F294 /* TimerStateManager+CoreDataProperties.swift in Sources */,
 				9A5466122B604E370046F294 /* idelGame.xcdatamodeld in Sources */,
+				9A5466512B6A75E10046F294 /* TimerStateManager+CoreDataClass.swift in Sources */,
+				9A5466592B6D994A0046F294 /* ManagerList+CoreDataClass.swift in Sources */,
 				9A54662A2B65C7440046F294 /* FirstFish.swift in Sources */,
+				9A5466562B6C56B80046F294 /* GameStateManager+CoreDataProperties.swift in Sources */,
 				9A5466082B604E370046F294 /* AppDelegate.swift in Sources */,
 				9A54660A2B604E370046F294 /* SceneDelegate.swift in Sources */,
+				9A5466552B6C56B80046F294 /* GameStateManager+CoreDataClass.swift in Sources */,
 				9A5466242B6303980046F294 /* GameSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -183,14 +203,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		9A54660D2B604E370046F294 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9A54660E2B604E370046F294 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		9A5466152B604E390046F294 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -327,7 +339,6 @@
 				INFOPLIST_FILE = idelGame/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -354,7 +365,6 @@
 				INFOPLIST_FILE = idelGame/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
