@@ -28,14 +28,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
-        do{
-            let timers = try context.fetch(TimerStateManager.fetchRequest())
-            timers[0].timeOfLogOff = Date()
-            try context.save()
-        }
-        catch{
-
-        }
         print("disconnect")
     }
 
@@ -52,6 +44,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 // Safely unwrap the optional UIWindow
                 if let window = window, let viewController = window.rootViewController as? ViewController {
                     // Call the function in the view controller
+                    print("asdasdasd")
                     viewController.getLastLogOff()
                 }
             }
@@ -67,6 +60,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
+        do{
+            let timers = try context.fetch(TimerStateManager.fetchRequest())
+            timers[0].timeOfLogOff = Date()
+            try context.save()
+        }
+        catch{
+
+        }
+        
+        if let window = window, let viewController = window.rootViewController as? ViewController {
+            // Call the function in the view controller
+            print("got here in the code")
+            viewController.stopTimerBar()
+        }
         print("Will move from active to inactive")
     }
 
@@ -81,14 +88,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
         print("Did enter background")
-        do{
-            let timers = try context.fetch(TimerStateManager.fetchRequest())
-            timers[0].timeOfLogOff = Date()
-            try context.save()
-        }
-        catch{
 
-        }
         
         
         

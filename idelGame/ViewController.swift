@@ -294,6 +294,7 @@ class ViewController: UIViewController {
     }
     
     @objc func stopTimerBar(){
+        print("it happned with the disconnect")
         self.firstFish?.stopProgressBarTimer()
         self.firstFish?.isInProgress = false
         do{
