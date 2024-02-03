@@ -276,6 +276,11 @@ class ViewController: UIViewController {
             
             try context.execute(managersBatchDeleteRequest)
             
+            let progressFetchRequest: NSFetchRequest<NSFetchRequestResult> = GameStateManager.fetchRequest()
+            let progressBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: progressFetchRequest)
+            
+            try context.execute(progressBatchDeleteRequest)
+            
             try context.save()
             
             // Reset your balance or perform any other necessary actions
@@ -290,7 +295,7 @@ class ViewController: UIViewController {
     
     @objc func stopTimerBar(){
         self.firstFish?.stopProgressBarTimer()
-        
+        self.firstFish?.isInProgress = false
         do{
             let gameState = try self.context.fetch(GameStateManager.fetchRequest())
             print("From The view controller--", gameState[0].firstFishStatus)
